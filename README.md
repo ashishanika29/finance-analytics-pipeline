@@ -1,2 +1,2 @@
-# finance-analytics-pipeline
-finance-analytics-pipeline
+# finance_analytics_pipeline
+finance_analytics_pipeline
