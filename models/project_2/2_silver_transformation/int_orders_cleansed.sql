@@ -18,14 +18,17 @@ with staging_data as (
     select * from {{ ref('stg_orders') }}
 ),
 
--- STEP 2: Apply cleansing and formatting logic
+-- STEP 2: Apply cleansing, formatting, and business logic
 cleansed_data as (
     select
         order_id,
         customer_id,
         order_date::date as order_date,
-        -- Ensure amount is a decimal and handle any nulls
-        coalesce(amount, 0)::decimal(10,2) as order_amount_usd,
+        -- LOGIC: Handle nulls, cast to decimal, AND ensure no negative values
+        case 
+            when coalesce(amount, 0) < 0 then 0 
+            else coalesce(amount, 0)
+        end::decimal(10,2) as order_amount_usd,
         upper(trim(status)) as order_status
     from staging_data
     -- THE FIX: Only keep orders where the customer exists in our cleansed customer table
