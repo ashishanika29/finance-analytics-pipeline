@@ -4,6 +4,10 @@ sources:
   - name: project_2_source
     database: DEMO_PROJECT_2
     schema: BRONZE_STG
+    #freshness:
+      #warn_after: {count: 24, period: hour}
+      #error_after: {count: 48, period: hour}
+    #loaded_at_field: _etl_loaded_at
     tables:
       - name: customers # logical name
         identifier: 'CUSTOMERS' # physical table name
