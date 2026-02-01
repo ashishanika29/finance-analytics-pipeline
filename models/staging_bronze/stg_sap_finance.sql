@@ -1,3 +1,11 @@
+
+{{
+    config(
+        materialized='view'
+        schema='SILVER_INT_FINANCE'
+    )
+}}
+
 with source as (
     select * from {{ source('sap_raw_data', 'sap_finance_inbound') }} 
 )

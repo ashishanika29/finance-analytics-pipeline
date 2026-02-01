@@ -8,6 +8,14 @@
         4. Deduplicate transactions using QUALIFY.
 */
 
+
+{{
+    config(
+        materialized='table'
+        schema='SILVER_INT_FINANCE'
+    )
+}}
+
 -- STEP 1: Import raw data from our Bronze Staging view
 WITH staging_data AS (
     SELECT * FROM {{ ref('stg_sap_finance') }}

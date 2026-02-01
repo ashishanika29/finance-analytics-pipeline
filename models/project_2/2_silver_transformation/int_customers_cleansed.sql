@@ -10,6 +10,7 @@
 {{
     config(
         materialized='table'
+        schema='SILVER_TRANFORMATION'
     )
 }}
 
